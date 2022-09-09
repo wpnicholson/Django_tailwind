@@ -95,6 +95,7 @@
       'myapp',
   ]
   ```
+
 * With the new app registered you should notice the addition of various `.py` files in the `myapp` folder.
 * For templating, create a new folder called `templates` inside of `myapp` folder. And then, inside of `templates` create another new folder named `myapp`. Finally create an empty file named `index.html` inside `templates/myapp`.
 * Now, inside `myapp/views.py` we'll add the view for the above `index.html` file.
