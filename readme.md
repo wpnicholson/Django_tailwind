@@ -17,7 +17,7 @@
       ]
       ```
 
-   3. Create a Tailwind CSS compatible Django app. Since this is for the benefit of Tailwind, i.e. css styling, it usually makes sense to call it `theme`. So, run the commande `python manage.py tailwind init` and at the prompt enter the name `theme`. Upon doing this you will see a new folder appear within your existing Django project. This folder will contain the `theme` Django app.
+   3. Create a Tailwind CSS compatible Django app. Since this is for the benefit of Tailwind, i.e. css styling, it usually makes sense to call it `theme`. So, change directories into the `new_project` folder (where `manage.py` is situated) and run the command `python manage.py tailwind init` and at the prompt enter the name `theme`. Upon doing this you will see a new folder appear within your existing Django project. This folder will contain the `theme` Django app.
    4. Thus now we need to register this new `theme` Django app by adding it to `INSTALLED_APPS` in `settings.py`:
 
        ```python
@@ -77,7 +77,7 @@
 
 * There will be two servers that you need to run to make your life easier during further development of your Django project:
   1. The Tailwind server that will watch behind the scenes and update everytime changes are made to your CSS styling as you develop. This server is started in item 11 above: `python manage.py tailwind start`.
-  2. Stuff.
+  2. The Django development server: `python manage.py runserver`.
 
 ## Create a new Django App
 
@@ -96,7 +96,20 @@
   ]
   ```
 
-* With the new app registered you should notice the addition of various `.py` files in the `myapp` folder.
+* Also, add the routing to your root URLconf in `myproject/urls.py`:
+
+  ```python
+  from django.urls import include, path
+
+  urlpatterns = [
+      path('admin/', admin.site.urls),
+
+      path("__reload__/", include("django_browser_reload.urls")),
+
+      path('', include('myapp.urls')),
+  ]
+  ```
+
 * For templating, create a new folder called `templates` inside of `myapp` folder. And then, inside of `templates` create another new folder named `myapp`. Finally create an empty file named `index.html` inside `templates/myapp`.
 * Now, inside `myapp/views.py` we'll add the view for the above `index.html` file.
 
